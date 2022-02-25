@@ -1,6 +1,6 @@
 import React from "react";
+import '../Header/Header.css';
 import MainNavDropdown from "./MainNavDropdown";
-
 
 function Header() {
   return (
