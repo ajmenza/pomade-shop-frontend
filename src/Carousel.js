@@ -3,7 +3,8 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 function Carousel() {
   const [featuredPomades, setFeaturedPomades] = useState([]);
-  const [index, setIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [index, setIndex] = useState(2);
 
   const url = "http://localhost:5000/api/v1/products";
 
@@ -15,6 +16,7 @@ function Carousel() {
       const { products } = await response.json();
       console.log(products);
       setFeaturedPomades(products);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -22,7 +24,7 @@ function Carousel() {
 
   useEffect(() => {
     fetchPomades();
-  }, []);
+  }, [url]);
 
   const nextSlide = () => {
     setIndex((oldIndex) => {
@@ -53,7 +55,7 @@ function Carousel() {
         }
         return index;
       });
-    },4000);
+    }, 4000);
     return () => clearInterval(slider);
   }, [index]);
 
@@ -75,27 +77,18 @@ function Carousel() {
               position = "lastSlide";
             }
             return (
-              <img
+              <div
                 className={`featured-image ${position}`}
                 key={_id}
-                src={image}
-                alt={name}
                 onLoad={nextSlide}
-              />
+                style={{ backgroundImage: `url(${image})` }}
+              ></div>
             );
           }
         })}
+
+        <button className="shop-now-btn">All Pomades</button>
       </div>
-      {/* <button className="btn-prev" onClick={prevSlide}>
-        <span>
-          <FaChevronLeft />
-        </span>
-      </button>
-      <button className="btn-next" onClick={nextSlide}>
-        <span>
-          <FaChevronRight />
-        </span>
-      </button> */}
     </section>
   );
 }
