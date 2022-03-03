@@ -1,25 +1,18 @@
 import React, { useState } from "react";
-import Carousel from "./Carousel";
-import Header from './Header/Header'
+import Header from "./Header/Header";
+import Home from './Pages/Home';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import logo from "./logo.svg";
-
+import Pomades from "./Pages/Pomades";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Main />
-    </>
-  );
-}
-
-
-
-function Main() {
-  return (
-    <main>
-      <Carousel />
-    </main>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />}></Route>
+          <Route path="/pomades" element={<Pomades/>}></Route>
+        </Routes>
+      </Router>
   );
 }
 

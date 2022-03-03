@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import shopMenuItems from "../ui-data";
+import shopMenuItems from '../ui-data';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 

@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import '../Carousel.css';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 
 function Carousel() {
   const [featuredPomades, setFeaturedPomades] = useState([]);
@@ -36,15 +39,15 @@ function Carousel() {
     });
   };
 
-  const prevSlide = () => {
-    setIndex((oldIndex) => {
-      let index = oldIndex - 1;
-      if (index < 0) {
-        index = featuredPomades.length - 1;
-      }
-      return index;
-    });
-  };
+  // const prevSlide = () => {
+  //   setIndex((oldIndex) => {
+  //     let index = oldIndex - 1;
+  //     if (index < 0) {
+  //       index = featuredPomades.length - 1;
+  //     }
+  //     return index;
+  //   });
+  // };
 
   useEffect(() => {
     let slider = setInterval(() => {
@@ -86,8 +89,7 @@ function Carousel() {
             );
           }
         })}
-
-        <button className="shop-now-btn">All Pomades</button>
+        <Link to={'/pomades'} className="all-pomades-btn">All Pomades</Link>
       </div>
     </section>
   );
