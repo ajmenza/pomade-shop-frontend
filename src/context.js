@@ -1,14 +1,47 @@
-import React, { useState, useContext } from "react";
-import pomades from "./pomades";
+import React, { useState, useContext, useEffect } from "react";
 
 const AppContext = React.createContext();
 
-const AppProvider = ({children}) => {
+const AppProvider = ({ children }) => {
+  const [pomades, setPomades] = useState([]);
+  const [loadingPomades, setLoadingPomades] = useState(true);
+  // const [pomadeFields, setPomadeFields] = useState([]);
+
+  const url = "http://localhost:5000/api/v1/products";
+
+  const fetchPomades = async () => {
+    console.log("fetch");
+    setLoadingPomades(true);
+    try {
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      const { products } = await response.json();
+      setPomades(products);
+      setLoadingPomades(false);
+    } catch (error) {
+      console.log(error);
+      setLoadingPomades(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPomades();
+  }, [url]);
+
+  // useEffect(() => {
+  //   getPomadeFields();
+  // }, [pomades]);
+
   return (
-    <AppContext.Provider>
+    <AppContext.Provider value={{ pomades, loadingPomades, setLoadingPomades }}>
       {children}
     </AppContext.Provider>
-  )
-}
+  );
+};
 
-export {AppContext, AppProvider};
+export const useGlobalContext = () => {
+  return useContext(AppContext);
+};
+
+export { AppContext, AppProvider };
