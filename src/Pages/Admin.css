@@ -31,6 +31,15 @@
   margin-bottom: .2rem;
 }
 
+.category-select.pomade-field {
+  background-color: white;
+  height: 1.7rem;
+}
+
+.category-option {
+  box-shadow: none;
+}
+
 .pomade-field {
   height: 1.5rem;
   border-radius: 3px;

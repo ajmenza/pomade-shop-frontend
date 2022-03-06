@@ -1,12 +1,12 @@
-const ProductField = ({label}) => {
+const ProductField = ({label, type, name}) => {
   return (
     <>
-      <label className="pomade-label" htmlFor="name">{label}</label>
+      <label className="pomade-label" htmlFor={name}>{label}</label>
       <input
         className="pomade-field"
-        name="name"
-        id="name"
-        type="text"
+        name={name}
+        id={name}
+        type={type}
       />
     </>
   );
