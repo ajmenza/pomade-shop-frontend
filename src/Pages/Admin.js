@@ -1,12 +1,13 @@
 import Header from "../Header/Header";
 import "./Admin.css";
 import { useGlobalContext } from "../context";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ProductField from "../Components/ProductField";
 
 const Admin = () => {
-  // const pomadeCategory = useRef(false);
+  const productCategory = useRef(null);
   const { pomades, loadingPomades } = useGlobalContext();
+  const [pomadeSelected, setPomadeSelected] = useState(false);
   const [pomadeFields, setPomadeFields] = useState([]);
 
   // if (pomades.length > 0) {
@@ -19,12 +20,54 @@ const Admin = () => {
   //   console.log(Object.keys(fields));
   // }
 
+  const handleSelect = () => {
+    if (productCategory.current.value === "pomade") {
+      setPomadeSelected(true);
+    } else {
+      setPomadeSelected(false);
+    }
+  };
+
   useEffect(() => {
     if (!loadingPomades) {
       setPomadeFields(Object.keys(pomades[0]));
     }
-    console.log(pomadeFields);
   }, []);
+
+  useEffect(() => {
+    if (productCategory.current.value === "pomade") {
+      setPomadeSelected(true);
+    } else {
+      setPomadeSelected(false);
+    }
+  }, [pomadeSelected]);
+
+  const handleImage = async (e) => {
+    const imageFile = e.target.files[0];
+    console.log(imageFile);
+    const imageData = new FormData();
+    imageData.append("image", imageFile);
+    for (var value of imageData.entries()) {
+      console.log(value);
+    }
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/products/uploads",
+        {
+          credentials: "include",
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: imageData,
+        }
+      );
+      const response2 = await response.json();
+      console.log(response2);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -39,27 +82,34 @@ const Admin = () => {
             className="pomade-field category-select"
             name="product-category"
             id="product-category"
+            ref={productCategory}
+            onChange={handleSelect}
           >
-            <option className="category-option" value="">
-              -- Choose a category --
-            </option>
-            <option className="category-option" value="pomade">
-              Pomade
-            </option>
-            <option className="category-option" value="other">
-              Other
-            </option>
+            <option value="">-- Choose a category --</option>
+            <option value="pomade">Pomade</option>
+            <option value="other">Other</option>
           </select>
-          <ProductField label={"Product Name"} name="name" type={"text"} />
+          <ProductField label="Product Name" name="name" type="text" />
+          <ProductField label="Product Company" name="company" type="text" />
+          <ProductField label="Product Type" name="type" type="text" />
+          <ProductField label="Product Price" name="price" type="text" />
           <ProductField
-            label={"Product Company"}
-            name="company"
-            type={"text"}
+            label="Product Description"
+            name="description"
+            type="text"
           />
-          <ProductField label={"Product Type"} name="type" type={"text"} />
-          <ProductField label={"Product Price"} name="price" type={"text"} />
-          <ProductField label={"Pomade Hold"} name="hold" type={"text"} />
-          <ProductField label={"Pomade Hold"} name="hold" type={"text"} />
+          <ProductField label="Pomade Hold" name="hold" type="text" />
+          <ProductField label="Pomade Scent" name="scent" type="text" />
+          <label className="pomade-label" htmlFor="image">
+            Product Image
+          </label>
+          <input
+            className="pomade-field"
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImage}
+          />
         </form>
       </div>
     </>

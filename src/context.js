@@ -10,7 +10,6 @@ const AppProvider = ({ children }) => {
   const url = "http://localhost:5000/api/v1/products";
 
   const fetchPomades = async () => {
-    console.log("fetch");
     setLoadingPomades(true);
     try {
       const response = await fetch(url, {

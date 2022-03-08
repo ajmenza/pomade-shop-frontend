@@ -1,5 +1,6 @@
 const ProductField = ({label, type, name}) => {
   return (
+    
     <>
       <label className="pomade-label" htmlFor={name}>{label}</label>
       <input
