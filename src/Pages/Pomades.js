@@ -5,7 +5,7 @@ import "./Pomades.css";
 const Pomades = () => {
   const { pomades } = useGlobalContext();
   return (
-    <>
+    <div className="page-container">
       <Header />
       <div className="pomades-container">
         <div className="pomades">
@@ -25,14 +25,18 @@ const Pomades = () => {
             } = pomade;
             return (
               <div className="single-pomade" key={_id}>
-                <img className="pomade-image" src={image} alt={name} />
-                <h2>{name}</h2>
+                <img className="product-image" src={image} alt={name} />
+                <div className="product-text">
+                  <h3 className="product-company">{company}</h3>
+                  <h2 className="product-name">{name}</h2>
+                  <p className="product-price">${price.toFixed(2)}</p>
+                </div>
               </div>
             );
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -9,11 +9,17 @@
 *, *::before, *::after {
   box-sizing: border-box;
   border: none;
+  margin: 0;
 }
 
 body {
   margin: 0;
   font-family: 'work sans', sans-serif;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
 }
 
 

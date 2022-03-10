@@ -1,15 +1,15 @@
 const ProductField = ({label, type, name}) => {
   return (
     
-    <>
+    <div className="product-field">
       <label className="pomade-label" htmlFor={name}>{label}</label>
       <input
-        className="pomade-field"
+        className="product-input"
         name={name}
         id={name}
         type={type}
       />
-    </>
+    </div>
   );
 };
 

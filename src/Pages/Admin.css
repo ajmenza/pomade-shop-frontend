@@ -15,7 +15,8 @@
 
 .create-product-form {
   background-color: aqua;
-  width: 80%;
+  width: 90%;
+  max-width: 800px;
   /* height: 10em; */
   display: flex;
   flex-direction: column;
@@ -24,31 +25,48 @@
   margin-bottom: 3rem;
 }
 
+.product-form-grid-container {
+  display: grid;
+  gap: 1.5rem 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.product-field {
+  display: flex;
+  flex-direction: column;
+}
+
 .product-name {
   
 }
 
 .pomade-label {
-  margin-bottom: .2rem;
+  margin-bottom: .5rem;
 }
 
-.category-select.pomade-field {
+.category-select.product-input {
   background-color: white;
   height: 1.7rem;
 }
 
-.pomade-field {
+.product-input {
   height: 1.5rem;
   border-radius: 3px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.24);
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
+  width: 100%;
 }
-.pomade-field:last-of-type {
+.product-input:last-of-type {
   margin-bottom: none;
 }
 
 .product-description {
   height: 3rem;
+}
+
+.product-image-label {
+  margin-top: 1rem;
+  margin-bottom: .5rem;
 }
 
 input[type=file]::file-selector-button {
@@ -68,8 +86,4 @@ input[type=file]::file-selector-button:hover {
 
 input[type=file] {
   background-color: white;
-}
-
-input[type=file]::content {
-
 }

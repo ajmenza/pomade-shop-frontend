@@ -47,6 +47,7 @@ function MainNavDropdownList({ listOpen }) {
         </a>
         <div className={`dot ${showLinks}`}><span>3</span></div>
       </li>
+      
     </ul>
   );
 }
