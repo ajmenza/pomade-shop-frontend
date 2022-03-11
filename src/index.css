@@ -4,6 +4,7 @@
   --shadow: 0px 1px 5px rgba(0, 0, 0, 0.103);
   --text-glow-light: 2px 2px 0px hsl(0, 0%, 100%);
   --text-glow-dark: 2px 2px 0px black;
+  --admin-bottom-margin: 1.25rem;
 }
 
 *, *::before, *::after {

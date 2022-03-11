@@ -1,3 +1,9 @@
+:root {
+  --create-product-bottom-margin: .75rem;
+  --create-product-label-margin: .5rem;
+}
+
+
 .admin-container {
   top: 3rem;
   position: absolute;
@@ -27,7 +33,7 @@
 
 .product-form-grid-container {
   display: grid;
-  gap: 1.5rem 1rem;
+  gap: var(--create-product-bottom-margin) 1rem;
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -41,7 +47,7 @@
 }
 
 .pomade-label {
-  margin-bottom: .5rem;
+  margin-bottom: var(--create-product-label-margin);
 }
 
 .category-select.product-input {
@@ -52,7 +58,7 @@
 .product-input {
   height: 1.5rem;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.24);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
   /* margin-bottom: 1rem; */
   width: 100%;
 }
@@ -64,9 +70,13 @@
   height: 3rem;
 }
 
-.product-image-label {
-  margin-top: 1rem;
-  margin-bottom: .5rem;
+/* .product-image-label {
+  margin-top: var(--create-product-bottom-margin);
+  margin-bottom: var(--create-product-label-margin);
+} */
+
+.image-upload-error {
+  color: red;
 }
 
 input[type=file]::file-selector-button {
@@ -76,7 +86,8 @@ input[type=file]::file-selector-button {
   font-family: 'work sans', sans-serif;
   height: 100%;
   margin-right: 0.7rem;
-  padding: 0 .5rem;
+  font-size: .75rem;
+  padding: 0 .4rem;
   transition: all 200ms linear;
 }
 
@@ -86,4 +97,26 @@ input[type=file]::file-selector-button:hover {
 
 input[type=file] {
   background-color: white;
+}
+
+.add-product-btn {
+  font-size: 1rem;
+  margin-top: calc(var(--create-product-bottom-margin) + 1rem);
+  padding: 0.25rem;
+  background-color:rgb(255, 238, 0);
+  border: none;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  font-family: 'work sans', sans-serif;
+  transition: background-color 200ms linear, transform 100ms ease;
+  border-radius: 3px;
+}
+
+.add-product-btn:hover {
+  transform: translateY(-13%);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.add-product-btn:active {
+  transform: translateY(0);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
 }

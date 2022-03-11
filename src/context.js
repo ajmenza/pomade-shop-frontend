@@ -5,6 +5,7 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [pomades, setPomades] = useState([]);
   const [loadingPomades, setLoadingPomades] = useState(true);
+  const [createProductData, setCreateProductData] = useState({});
   // const [pomadeFields, setPomadeFields] = useState([]);
 
   const url = "http://localhost:5000/api/v1/products";
@@ -33,7 +34,7 @@ const AppProvider = ({ children }) => {
   // }, [pomades]);
 
   return (
-    <AppContext.Provider value={{ pomades, loadingPomades, setLoadingPomades }}>
+    <AppContext.Provider value={{ pomades, loadingPomades, setLoadingPomades, createProductData, setCreateProductData }}>
       {children}
     </AppContext.Provider>
   );
