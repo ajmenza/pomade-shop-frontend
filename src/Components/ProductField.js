@@ -28,3 +28,4 @@ const ProductInputField = ({ label, type, name }) => {
 };
 
 export default ProductInputField;
+

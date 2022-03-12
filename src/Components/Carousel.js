@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../Carousel.css";
+import "../Components/Carousel.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";

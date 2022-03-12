@@ -19,7 +19,10 @@ const Admin = () => {
       setCreateProductData({ ...createProductData, category: productCategory });
     } else {
       setPomadeSelected(false);
-      let newCreateProductData = { ...createProductData, category: productCategory }
+      let newCreateProductData = {
+        ...createProductData,
+        category: productCategory,
+      };
       delete newCreateProductData.shine;
       delete newCreateProductData.hold;
       setCreateProductData(newCreateProductData);
@@ -40,39 +43,52 @@ const Admin = () => {
     }
   }, [pomadeSelected]);
 
-  const handleImage = async (e) => {
+  const handleImage = (e) => {
     const imageFile = e.target.files[0];
     const imageData = new FormData();
     imageData.append("image", imageFile);
     setCreateProductData({ ...createProductData, image: imageData });
-
   };
 
   const uploadImage = async () => {
-    const response = await fetch(
-      "/api/v1/products/uploads",
-      {
+    try {
+      const response = await fetch("/api/v1/products/uploads", {
         credentials: "include",
         method: "POST",
         body: createProductData.image,
-      }
-    );
-    const { image: { src } } = await response.json();
-    setCreateProductData({ ...createProductData, image: src });
-  }
+      });
+      const { image: { src } } = await response.json();
+      console.log(src);
+      setCreateProductData({ ...createProductData, image: src });
+      console.log(createProductData);
+    } catch (error) {
+      setIsImageError(true);
+      console.log(error);
+      setTimeout(() => {
+        setIsImageError(false);
+      }, 3000);
+    }
+  };
 
   // Uploads product to database
   const addProduct = async (e) => {
     e.preventDefault();
     try {
       await uploadImage();
+      const response = await fetch("/api/v1/products", {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify(createProductData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const product = await response.json();
+      console.log(product);
+      // setCreateProductData({});
     } catch (error) {
-      setIsImageError(true);
-      setTimeout(() => {
-        setIsImageError(false);
-      }, 3000);
+      console.log(error);
     }
-
   };
 
   // useEffect(() => {
@@ -80,7 +96,6 @@ const Admin = () => {
 
   //   }
   // }, [isImageError])
-
 
   return (
     <>
@@ -108,12 +123,24 @@ const Admin = () => {
             <ProductInputField label="Product Name" name="name" type="text" />
             {pomadeSelected && (
               <>
-                <ProductInputField label="Pomade Hold" name="hold" type="text" />
-                <ProductInputField label="Pomade Shine" name="scent" type="text" />
+                <ProductInputField
+                  label="Pomade Hold"
+                  name="hold"
+                  type="text"
+                />
+                <ProductInputField
+                  label="Pomade Shine"
+                  name="shine"
+                  type="text"
+                />
               </>
             )}
             <ProductInputField label="Product Scent" name="scent" type="text" />
-            <ProductInputField label="Product Company" name="company" type="text" />
+            <ProductInputField
+              label="Product Company"
+              name="company"
+              type="text"
+            />
             <ProductInputField label="Product Type" name="type" type="text" />
             <ProductInputField label="Product Price" name="price" type="text" />
             <ProductInputField
@@ -126,7 +153,8 @@ const Admin = () => {
                 Product Image
               </label>
               <input
-                className={`product-input ${isImageError && 'image-upload-error'}`}
+                className={`product-input ${isImageError && "image-upload-error"
+                  }`}
                 id="image"
                 type="file"
                 accept="image/*"
