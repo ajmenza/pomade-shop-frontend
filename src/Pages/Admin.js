@@ -11,6 +11,9 @@ const Admin = () => {
   const [pomadeFields, setPomadeFields] = useState([]);
   const [isImageError, setIsImageError] = useState(false);
   const { createProductData, setCreateProductData } = useGlobalContext();
+  const [imageFile, setImageFile] = useState({});
+  const [uploadSuccess, setUploadSuccess] = useState('');
+  const [uploadError, setUploadError] = useState(false);
 
   const handleSelect = () => {
     const productCategory = productCategoryRef.current.value;
@@ -47,7 +50,7 @@ const Admin = () => {
     const imageFile = e.target.files[0];
     const imageData = new FormData();
     imageData.append("image", imageFile);
-    setCreateProductData({ ...createProductData, image: imageData });
+    setImageFile(imageData);
   };
 
   const uploadImage = async () => {
@@ -55,12 +58,11 @@ const Admin = () => {
       const response = await fetch("/api/v1/products/uploads", {
         credentials: "include",
         method: "POST",
-        body: createProductData.image,
+        body: imageFile,
       });
       const { image: { src } } = await response.json();
       console.log(src);
       setCreateProductData({ ...createProductData, image: src });
-      console.log(createProductData);
     } catch (error) {
       setIsImageError(true);
       console.log(error);
@@ -84,7 +86,13 @@ const Admin = () => {
         }
       });
       const product = await response.json();
-      console.log(product);
+      // Incomplete fields error
+      if (product.msg) {
+        setUploadError(true);
+        setTimeout(() => {
+          setUploadError(false)
+        }, 3000);
+      }
       // setCreateProductData({});
     } catch (error) {
       console.log(error);
@@ -162,6 +170,7 @@ const Admin = () => {
               />
             </div>
           </div>
+          <p>Upload successful!</p>
           <button className="add-product-btn" type="submit">
             Add Product
           </button>
