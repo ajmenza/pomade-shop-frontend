@@ -1,41 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import "../Components/Carousel.css";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
 
 function Carousel() {
-  const { pomades, featuredPomades, setFeaturedPomades } = useGlobalContext();
-  const [index, setIndex] = useState(0);
-  const [indexCount, setIndexCount] = useState(0)
-  const [renders, setRenders] = useState(0)
-  const [rendersDone, setRendersDone] = useState(false);
-  const [startAnimation, setStartAnimation] = useState(false);
+  const { pomades, featuredPomades, setFeaturedPomades, index, setIndex, indexCount, setIndexCount } = useGlobalContext();
 
-  // console.log(renders);
-  // console.log(index);
-  console.log(indexCount);
 
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     const filterArray = pomades.filter((pomade) => {
       return pomade.featured === true;
     });
+    setIndex(filterArray.length - 1);
     setFeaturedPomades(filterArray);
   }, [pomades]);
 
 
   useEffect(() => {
-    if (indexCount > 0) {
-      setStartAnimation(true);
-    }
-  }, [index])
-
-  useEffect(() => {
-    if (renders == 2 && !rendersDone) {
-      console.log('gay');
-      setIndex(featuredPomades.length - 1);
-      setRendersDone(true);
-    }
-    if (rendersDone) {
+    if (indexCount > 2) {
       let slider = setInterval(() => {
         setIndex((oldIndex) => {
           let index = oldIndex + 1;
@@ -44,17 +27,25 @@ function Carousel() {
           }
           return index;
         });
-      }, 4000);
-      setIndexCount(indexCount + 1);
+      }, 3000);
       return () => clearInterval(slider);
+    } else {
+      setIndex((oldIndex) => {
+        let index = oldIndex + 1;
+        if (index > featuredPomades.length - 1) {
+          index = 0;
+        }
+        return index;
+      });
+      setIndexCount(indexCount + 1);
+
     }
-  }, [index, renders]);
+  }, [index]);
 
   return (
     <section>
       <div className="slideshow">
         {featuredPomades.map((pomade, pomadeIndex) => {
-        {renders < 2 && setRenders(renders + 1)}
           const { image, name, _id } = pomade;
           let position = "nextSlide";
           if (pomadeIndex === index) {
@@ -68,7 +59,7 @@ function Carousel() {
           }
           return (
             <div
-              className={`featured-image ${position} ${startAnimation && 'slideshow-animation'}`}
+              className={`featured-image ${position}`}
               key={_id}
               style={{ backgroundImage: `url(${image})` }}
             ></div>

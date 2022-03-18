@@ -1,20 +1,28 @@
 import React, { useState } from "react";
 import Header from "./Header/Header";
-import Home from './Pages/Home';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import { Route, Routes } from "react-router-dom";
 import logo from "./logo.svg";
 import Pomades from "./Pages/Pomades";
-import Admin from "./Pages/Admin"
+import Admin from "./Pages/Admin";
+import Layout from "./Pages/Layout";
+import SinglePomade from "./Pages/SinglePomade";
+import NoMatch from "./Pages/NoMatch";
+
 
 function App() {
   return (
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route path="/pomades" element={<Pomades/>}></Route>
-          <Route path="/admin" element={<Admin/>}></Route>
-        </Routes>
-      </Router>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/pomades" element={<Pomades />} />
+          <Route path="/pomades/id:" element={<SinglePomade />} />
+          <Route path="*" element={<NoMatch />} />
+          <Route path="/admin" element={<Admin />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

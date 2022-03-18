@@ -7,6 +7,8 @@ const AppProvider = ({ children }) => {
   const [loadingPomades, setLoadingPomades] = useState(true);
   const [createProductData, setCreateProductData] = useState({});
   const [featuredPomades, setFeaturedPomades] = useState([]);
+  const [index, setIndex] = useState(0);
+  const [indexCount, setIndexCount] = useState(0);
   // const [pomadeFields, setPomadeFields] = useState([]);
 
   const url = "http://localhost:5000/api/v1/products";
@@ -45,12 +47,17 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         pomades,
+        setPomades,
         loadingPomades,
         setLoadingPomades,
         createProductData,
         setCreateProductData,
         featuredPomades,
         setFeaturedPomades,
+        index,
+        setIndex,
+        indexCount,
+        setIndexCount,
       }}
     >
       {children}

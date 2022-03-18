@@ -5,6 +5,7 @@
   --text-glow-light: 2px 2px 0px hsl(0, 0%, 100%);
   --text-glow-dark: 2px 2px 0px black;
   --admin-bottom-margin: 1.25rem;
+  --pomade-grid-height: ;
 }
 
 *, *::before, *::after {
