@@ -7,7 +7,6 @@ function Carousel() {
   const { pomades, featuredPomades, setFeaturedPomades, index, setIndex, indexCount, setIndexCount } = useGlobalContext();
 
 
-
   useLayoutEffect(() => {
     const filterArray = pomades.filter((pomade) => {
       return pomade.featured === true;

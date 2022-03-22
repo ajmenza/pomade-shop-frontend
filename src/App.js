@@ -9,16 +9,16 @@ import Layout from "./Pages/Layout";
 import SinglePomade from "./Pages/SinglePomade";
 import NoMatch from "./Pages/NoMatch";
 
-
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/pomades" element={<Pomades />} />
-          <Route path="/pomades/id:" element={<SinglePomade />} />
-          <Route path="*" element={<NoMatch />} />
+          <Route path="pomades" element={<Pomades />}>
+            {/* <Route path="*" element={<NoMatch />} /> */}
+          </Route>
+          <Route path="pomades/:pomadeID" element={<SinglePomade />} />
           <Route path="/admin" element={<Admin />} />
         </Route>
       </Routes>

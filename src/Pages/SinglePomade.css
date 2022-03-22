@@ -1,0 +1,10 @@
+.single-pomade-page {
+    position: absolute;
+    top: 3rem;
+    padding: 1rem;
+}
+
+.single-pomade-image {
+    width: 100%;
+    height: 20em;
+}
