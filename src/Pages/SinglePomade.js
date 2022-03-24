@@ -3,13 +3,16 @@ import { useGlobalContext } from "../context";
 import { useParams } from "react-router-dom";
 import React, { useState, useContext, useEffect } from "react";
 
+const capitalizeFirstLetter = (string) => {
+	let newString = string.charAt(0).toUpperCase();
+	newString = newString + string.slice(1);
+	return newString;
+}
 
 const SinglePomade = () => {
 	const { pomades } = useGlobalContext();
 	let { pomadeID } = useParams();
 	const [singlePomade, setSinglePomade] = useState({});
-
-	console.log(singlePomade);
 
 	useEffect(() => {
 		pomades.forEach((pomade) => {
@@ -19,6 +22,7 @@ const SinglePomade = () => {
 			}
 		});
 	}, [singlePomade])
+
 
 	// if (<NoMatch />) {
 
@@ -31,7 +35,6 @@ const SinglePomade = () => {
 				if (pomadeID === _id) {
 					const {
 						image,
-						featured,
 						name,
 						price,
 						category,
@@ -44,17 +47,28 @@ const SinglePomade = () => {
 						description
 					} = pomade;
 					return (
-						<div key={_id}>
-							<img className="single-pomade-image" src={image} alt="" />
-							<h1>{name}</h1>
-							<h2>{company}</h2>
-							<p>{description}</p>
-							<h3>${price.toFixed(2)}</h3>
-							<h3>{hold}</h3>
-							<h3>{type}</h3>
-							<h3>{scent}</h3>
-							<h3>{shine}</h3>
+						<div className="single-pomade-container" key={_id}>
+							<img className="single-pomade-image" src={image} alt={name} />
+							<div className="single-pomade-info">
+								<div className="single-pomade-border border-bottom-none">
+									<h1 className="single-pomade-name">{name}</h1>
+									<div className="flex">
+										<h2 className="single-pomade-company">{company}</h2>
+										<p>${price.toFixed(2)}</p>
+									</div>
+								</div>
+								<div className="single-pomade-border sp-body">
+									<p className="single-pomade-description">{description}</p>
+									<div className="single-pomade-grid">
+										<h3>Hold: {capitalizeFirstLetter(hold)}</h3>
+										<h3>Type: {capitalizeFirstLetter(type)}</h3>
+										<h3>Scent: {capitalizeFirstLetter(scent)}</h3>
+										<h3>Shine: {capitalizeFirstLetter(shine)}</h3>
+									</div>
+								</div>
+							</div>
 						</div>
+
 					)
 				}
 			})}
