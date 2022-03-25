@@ -9,6 +9,21 @@ const capitalizeFirstLetter = (string) => {
 	return newString;
 }
 
+const paragraphBreak = (text) => {
+	console.log(text.length);
+	let paragraphs = [];
+	let paragraph = '';
+	for (let character = 0; character < text.length; character++) {
+		if (paragraph.length < 200) {
+			console.log(text[character]);
+			paragraph += text[character];
+		} else if (paragraph.length >= 200 && text[character] === '.') {
+			
+		}
+	}
+	console.log(paragraph);
+}
+
 const SinglePomade = () => {
 	const { pomades } = useGlobalContext();
 	let { pomadeID } = useParams();
@@ -46,6 +61,7 @@ const SinglePomade = () => {
 						_id,
 						description
 					} = pomade;
+					{ console.log(paragraphBreak(description)); }
 					return (
 						<div className="single-pomade-container" key={_id}>
 							<img className="single-pomade-image" src={image} alt={name} />
