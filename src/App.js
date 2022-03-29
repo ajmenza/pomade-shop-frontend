@@ -15,10 +15,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="pomades" element={<Pomades />}>
+          <Route path="pomades">
+            <Route index element={<Pomades />} />
             {/* <Route path="*" element={<NoMatch />} /> */}
+            <Route path=":pomadeID" element={<SinglePomade />} />
           </Route>
-          <Route path="pomades/:pomadeID" element={<SinglePomade />} />
           <Route path="/admin" element={<Admin />} />
         </Route>
       </Routes>
