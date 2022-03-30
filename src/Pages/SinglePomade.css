@@ -1,3 +1,21 @@
+:root {
+  /* Mobile */
+  --mobile-paragraph-font-size: .8rem;
+  --mobile-paragraph-line-height: 1rem;
+  --mobile-name-font-size: .9rem;
+  --mobile-grid-item-font-size: .8rem;
+  --mobile-company-font-size: .9rem;
+  --mobile-price-font-size: .9rem;
+  /* Medium */
+  --med-paragraph-font-size: 1rem;
+  --med-paragraph-line-height: 1rem;
+  --med-name-font-size: 1.2rem;
+  --med-grid-item-font-size: 1rem;
+  --med-company-font-size: 1.1rem;
+  --med-price-font-size: 1.1rem;
+  /* Large */
+}
+
 .single-pomade-page {
   position: absolute;
   top: 4rem;
@@ -9,7 +27,7 @@
 }
 
 .single-pomade-container {
-  max-width: 400px;
+  /* max-width: 400px; */
   width: 90vw;
 }
 
@@ -20,30 +38,35 @@
 
 .single-pomade-image {
   width: 100%;
-  /* height: 19em; */
-  max-height: 350px;
+  height: auto;
   margin-bottom: 0.5rem;
   box-shadow: var(--shadow);
   border-radius: 5px;
 }
 
 .single-pomade-name {
-  font-size: 1.5rem;
-  margin-bottom: 0.1rem;
+  font-size: var(--mobile-name-font-size);
+  margin-bottom: 0.4rem;
 }
 
 .single-pomade-paragraph {
   margin-bottom: 0.6rem;
-  line-height: 1.5rem;
+  line-height: var(--mobile-paragraph-line-height);
+  font-size: var(--mobile-paragraph-font-size);
 }
 
 .single-pomade-company {
-  font-size: 1rem;
+  font-size: var(--mobile-company-font-size);
   font-weight: 600;
+  margin-right: 1rem;
+}
+
+.single-pomade-price {
+  font-size: var(--mobile-price-font-size);
 }
 
 .single-pomade-description {
-  font-size: 1rem;
+
 }
 
 .sp-flex {
@@ -56,7 +79,7 @@
 }
 
 .sp-grid-item {
-  font-size: 1rem;
+  font-size: var(--mobile-grid-item-font-size);
   font-weight: 500;
   display: flex;
   flex-direction: column;
@@ -86,16 +109,79 @@
   box-shadow: var(--shadow);
 }
 
+@media (min-width: 370px) {
+  .single-pomade-company {
+    font-size: var(--med-company-font-size);
+  }
+  .single-pomade-paragraph {
+    font-size: var(--med-paragraph-font-size);
+    line-height: var(--med-paragraph-line-height);
+  }
+  .single-pomade-name {
+    font-size: var(--med-name-font-size);
+  }
+  .single-pomade-price {
+    font-size: var(--med-price-font-size);
+  }
+  .sp-grid-item {
+    font-size: var(--med-grid-item-font-size);
+  }
+
+  .single-pomade-container {
+    max-width: 530px;
+  }
+
+  .single-pomade-image {
+    /* max-width: 600px; */
+  }
+}
+
 @media (min-width: 700px) {
+  .single-pomade-company {
+    font-size: var();
+  }
+  .single-pomade-paragraph {
+    font-size: var();
+  }
+  .single-pomade-name {
+    font-size: var();
+  }
+  .single-pomade-price {
+    font-size: var();
+  }
+  .sp-grid-item {
+    font-size: var();
+  }
+
   .single-pomade-container {
     max-width: unset;
   }
 
   .single-pomade-image {
-    width: unset;
+    width: 60%;
   }
-
-  .single-pomade-info {
-
-  }
+  
 }
+
+
+
+
+
+
+
+
+/* .single-pomade-company {
+  font-size: var();
+}
+.single-pomade-paragraph {
+  font-size: var();
+}
+.single-pomade-name {
+  font-size: var();
+}
+.single-pomade-price {
+  font-size: var();
+}
+.sp-grid-item {
+  font-size: var();
+} */

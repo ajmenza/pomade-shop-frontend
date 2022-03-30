@@ -72,7 +72,7 @@ const SinglePomade = () => {
                   <h1 className="single-pomade-name">{name}</h1>
                   <div className="sp-flex">
                     <h2 className="single-pomade-company">{company}</h2>
-                    <p>${price.toFixed(2)}</p>
+                    <p className="single-pomade-price">${price.toFixed(2)}</p>
                   </div>
                 </div>
                 <div className="single-pomade-border sp-body">
